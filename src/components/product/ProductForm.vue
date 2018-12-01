@@ -1,31 +1,32 @@
 <!-- ./src/components/products/ProductForm.vue -->
 <template>
-  <form @submit.prevent="saveProduct">
-    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-      <div class="form-group">
+  <form class="columns" @submit.prevent="saveProduct">
+    <div class="container column">
+      <div class="">
         <label>Name</label>
         <input
           type="text"
           placeholder="Name"
           v-model="model.name"
           name="name"
-          class="form-control" />
+          v-validate="'required'"
+          :class="{'input': true, 'is-danger': errors.has('name'),}" />
       </div>
-      <div class="form-group">
+      <div class="">
         <label>Price</label>
         <input
           type="number"
-          class="form-control"
+          class="input"
           placeholder="Price"
           v-model="model.price"
           name="price"
         />
       </div>
-      <div class="form-group">
+      <div class="">
         <label>Manufacturer</label>
         <select
           type="text"
-          class="form-control"
+          class="input"
           v-model="model.manufacturer"
           name="manufacturer"
         >
@@ -40,28 +41,35 @@
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-      <div class="form-group">
-        <label>Image</label>
-        <input
-          type="text"
-          lass="form-control"
-          placeholder="Image"
-          v-model="model.image"
-          name="image"
-          class="form-control" />
+    <div class="column container">
+      <div class="file">
+        <label class="file-label">
+          <input
+            type="file"
+            placeholder="Image"
+            name="image"
+            class="file-input" />
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+        </label>
       </div>
-      <div class="form-group">
+      <div class="">
         <label>Description</label>
         <textarea
-          class="form-control"
+          class="textarea"
           placeholder="Description"
           rows="5"
           v-model="model.description"
           name="description"
         ></textarea>
       </div>
-      <div class="form-group new-button">
+      <div class="new-button">
         <button class="button">
           <i class="fa fa-pencil"></i>
           <!-- Conditional rendering for input text -->
@@ -75,7 +83,7 @@
 
 <script>
 export default {
-  props: ['model', 'isEditing'],
+  props: ['manufacturers', 'model', 'isEditing'],
   methods: {
     saveProduct() {
       this.$emit('save-product', this.model)

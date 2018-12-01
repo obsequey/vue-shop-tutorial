@@ -9,7 +9,9 @@
         <router-link class="navbar-item" to="/admin/new">New Product</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
